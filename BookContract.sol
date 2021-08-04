@@ -3,9 +3,14 @@
 
 pragma solidity ^0.8.0; 
 
-import "github.com/OpenZeppelin/openzeppelin-solidity/contracts/token/ERC721/IERC721.sol";
-import "github.com/OpenZeppelin/openzeppelin-solidity/contracts/token/ERC721/IERC721Receiver.sol";
-import "github.com/OpenZeppelin/openzeppelin-contracts/master/contracts/token/ERC721/ERC721.sol";
+import "@OpenZeppelin/openzeppelin-solidity/contracts/token/ERC721/IERC721.sol";
+import "@OpenZeppelin/openzeppelin-solidity/contracts/token/ERC721/IERC721Receiver.sol";
+import "@OpenZeppelin/openzeppelin-contracts/master/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+
+using Counters for Counters.Counter;
+Counters.Counter private _tokenIds;
+mapping(string => uint8) hashes;
 
 mapping (uint => Book) books; //map book_id to Book
 address[] authorAddresses;
