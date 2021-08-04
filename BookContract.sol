@@ -8,7 +8,9 @@ import "github.com/OpenZeppelin/openzeppelin-solidity/contracts/token/ERC721/IER
 import "github.com/OpenZeppelin/openzeppelin-contracts/master/contracts/token/ERC721/ERC721.sol";
 
 mapping (uint => Book) books; //map book_id to Book
+address[] authorAddresses;
 mapping (uint => Edition) editions;
+mapping (uint => address) authorAddress;
 
 
 struct Book {
@@ -39,8 +41,11 @@ contract BookCreation is IERC721 { //implement the IERC721 interface
         require(books[_bookID].authorAddr == msg.sender)
         _;
     }
-    _safeMint(address _authorAddr, uint _tokenIds) internal {
+    function _safeMint(address _authorAddr, uint _tokenIds) internal {
         _mint(address(this), _tokenIds);
         safeTransferFrom(address(this), _authorAddr, _tokenIds)
     }
+		function countAuthors() view public returns (uint) {
+			return authorAddresses.length;
+		}
 }
